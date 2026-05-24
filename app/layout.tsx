@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import {Exo } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import {ClerkProvider} from '@clerk/nextjs'
+import Provider from './Provider'
 
 
 
@@ -20,10 +22,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    <ClerkProvider>
     <html
       lang="en"
     >
-      <body className={appFont.className}>{children}</body>
+      <body className={appFont.className}>
+        <Provider>
+          {children}
+        </Provider>
+        </body>
     </html>
+    </ClerkProvider>
   );
 }
