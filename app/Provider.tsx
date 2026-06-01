@@ -1,28 +1,44 @@
-"use client"
-import React, { useEffect,useState } from 'react'
-import axios from 'axios'
-import { UserDetailContext } from '@/context/UserDetailContext'
+// app/provider.tsx
 
-function Provider({ children }: any) {
+"use client";
 
-    const [userDetail,setUserDetail] = useState()
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { UserDetailContext } from "@/context/UserDetailContext";
 
-    useEffect(()=>{
-          CreateNewUser()
-    },[])
+type UserType = {
+  success?: boolean;
+  message?: string;
+  name?: string;
+  email?: string;
+};
 
-    const CreateNewUser= async ()=>{
-        const result = await axios.post('/api/user',{})
-        
-        console.log(result.data)
-        setUserDetail(result?.data)
+function Provider({ children }: { children: React.ReactNode }) {
+  const [userDetail, setUserDetail] = useState<UserType | null>(null);
+
+  useEffect(() => {
+    CreateNewUser();
+  }, []);
+
+  const CreateNewUser = async () => {
+    try {
+      const result = await axios.post("/api/user", {});
+
+      console.log("API RESPONSE:", result.data);
+
+      setUserDetail(result.data);
+    } catch (error) {
+      console.log("API ERROR:", error);
     }
-return (
-    <UserDetailContext.Provider value={{userDetail,setUserDetail}} >
-         <div>{children}</div>
+  };
+
+  return (
+    <UserDetailContext.Provider
+      value={{ userDetail, setUserDetail }}
+    >
+      {children}
     </UserDetailContext.Provider>
-    
-   
-)
+  );
 }
-export default Provider
+
+export default Provider;

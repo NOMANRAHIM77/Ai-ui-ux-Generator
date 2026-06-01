@@ -1,14 +1,13 @@
-import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import { UserButton } from "@clerk/nextjs";
+// app/page.tsx
 
-export default function Home() {
+import Hero from "./_shared/Hero";
+import Header from "./_shared/Header";
+
+export default function HomePage() {
   return (
-    <div>
-    <div>hello world</div>
-    <Button>subscribe</Button>
-    <UserButton/>
-    </div>
-    
+    <main className="min-h-screen bg-[#f8f5fb]">
+      <Header />
+      <Hero />
+    </main>
   );
 }
