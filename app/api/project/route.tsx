@@ -1,4 +1,4 @@
-
+// api/project/route.tsx
 import { db } from "@/config/db";
 import { ProjectTable } from "@/config/schema";
 import { currentUser} from "@clerk/nextjs/server"; 
@@ -12,7 +12,8 @@ const {userInput, device, projectId} = await req.json();
 
 const result=await db.insert(ProjectTable).values({ 
     projectId:projectId,
-userId:user?.primaryEmailAddress?.emailAddress as string,
+userId:null,
+//user?.primaryEmailAddress?.emailAddress as string,
 device: device, 
 userInput:userInput
 }).returning()

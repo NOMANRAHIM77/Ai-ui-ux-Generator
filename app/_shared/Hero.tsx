@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Send, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 import axios from "axios";
 import {
   Select,
@@ -61,6 +62,7 @@ export default function Hero() {
   const [userInput, setUserInput] = useState("");
   const [device, setDevice] = useState("mobile");
   const [loading, setLoading] = useState(false);
+  const router = useRouter()
 
   const handleCategoryClick = (prompt: string) => {
     setUserInput(prompt);
@@ -94,6 +96,7 @@ export default function Hero() {
       });
 
       console.log("✅ API Response:", result.data);
+      router.push('/project/'+projectId)
     } catch (error) {
       if (axios.isAxiosError(error)) {
         console.error("❌ Status:", error.response?.status);
