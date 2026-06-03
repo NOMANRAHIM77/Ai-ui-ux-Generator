@@ -1,0 +1,10 @@
+
+export const THEME_NAME_LIST = [
+"NETFLIX",
+ "SHOPIFY",
+"AMAZON",
+"GOOGLE",
+"SPOTIFY",
+"APPLE",
+ "GITHUB",
+]
